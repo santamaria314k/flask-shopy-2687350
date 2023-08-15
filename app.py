@@ -1,18 +1,32 @@
 # dependencias del proyecto
-from flask import Flask 
+from flask import Flask ,render_template
+from flask_wtf import FlaskForm
+from wtforms import StringField,SubmitField
+from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
+from config import Config
 
 # crear el objeto de aplicación
 app = Flask(__name__)
 #configurar app para conectarse a bd
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost:3307/flask-shopy-2687350'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config.from_object(Config)
+
+#configurar bootstrap con app
+bootstrap = Bootstrap(app)
+
 # crear el objeto sqlalchemy
 db = SQLAlchemy(app)
 #crear el objeto de migracion y activarlo
 migrate = Migrate(app , db)
+
+#Crear el formulario de registro de productos
+class RegistroProductosForm(FlaskForm):
+    nombre=StringField('Nombre del producto')
+    precio=StringField('Precio del Producto')
+    submit = SubmitField('Guardar producto')
+
 
 ##Modelos <<entities>>
 class Cliente(db.Model):
@@ -27,7 +41,7 @@ class Productos(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     nombre =db.Column(db.String(64))
     precio =db.Column(db.Float)
-    imagen =db.Column(db.String(64))
+    imagen =db.Column(db.String(255) ,nullable=True)
 
 
 
@@ -53,3 +67,18 @@ class Detalle(db.Model):
 
 
 
+
+
+
+@app.route('/productos/registrar' , methods = ['GET' , 'POST'])
+def registrar():
+    form = RegistroProductosForm()
+    p = Productos()
+    if form.validate_on_submit():
+        #crear un objeto cliente
+        form.populate_obj(p)
+        db.session.add(p)
+        db.session.commit()
+        return "producto registrado"
+    return render_template('registrar.html' ,
+                          form = form )    
