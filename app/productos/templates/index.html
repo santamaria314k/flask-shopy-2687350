@@ -1,0 +1,28 @@
+
+{% extends "bootstrap/base.html" %}
+
+{%block head%}
+{{ super() }}
+{%endblock%}
+
+{%block body%}
+
+    <h1>Listado de Productos</h1>
+    
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos  %}
+            <tr>
+                <td>{{productos.nombre}}</td>
+                <td>{{productos.precio}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
