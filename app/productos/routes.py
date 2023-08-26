@@ -3,25 +3,22 @@ from . import productos
 import app
 from .forms import Registrarproductoform
 
-
-#rutas de el modulo "productos"
+# Rutas del módulo "productos"
 
 @productos.route("/listar")
 def listar():
-    #listar los productos utilizando 
-    #modelos
     productos = app.models.Productos.query.all()
     return render_template("index.html", productos=productos)
- 
-@productos.route("/nuevo" , methods=["GET","POST"])
+
+@productos.route("/nuevo", methods=["GET", "POST"])
 def nuevo():
-    form=Registrarproductoform()
-    p=app.models.Productos()
-    if  form.validate_on_submit():
+    form = Registrarproductoform()
+    if form.validate_on_submit():
+        p = app.models.Productos()
         form.populate_obj(p)
         app.db.session.add(p)
         app.db.session.commit()
+        return "producto registrado"  
+    return render_template("new.html", form=form)
 
-        return "producto registrado"
-        return render_template("new.html",form=form)
     

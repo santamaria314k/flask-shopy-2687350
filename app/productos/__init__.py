@@ -5,5 +5,5 @@ productos=Blueprint('productos',__name__,url_prefix='/productos',template_folder
 
 
 #vincular archivo de rutras
-
 from . import routes
+
