@@ -1,10 +1,7 @@
-{% extends "bootstrap/base.html" %}
 
-{% block head %}
-    {{ super() }}
-{% endblock %}
+{% extends 'base.html' %}
 
-{% block body %}
+{% block content %}
     <h1>Listado de Productos</h1>
     
     <table class="table table-hover">
@@ -12,6 +9,8 @@
             <tr>
                 <th>Nombre</th>
                 <th>Precio</th>
+                <th>imagen</th>
+
             </tr>
         </thead>
         <tbody>
@@ -19,6 +18,8 @@
             <tr>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.precio }}</td>
+                <td><img src="imagenes/{{producto.imagen}}" alt=""></td>
+
             </tr>
             {% endfor %}
         </tbody>
