@@ -4,10 +4,14 @@
 
 <div class="container-fluid">
 
-
     <ul class="nav navbar-nav">
-        <li><a href="">Productos</a></li>
-        <li><a href="">Clientes </a></li> 
+        <li><a href="{{ url_for('productos.listar') }}">Productos</a></li>
+        <li><a href="{{ url_for('clientes.listarcli') }}">Clientes </a></li>
+        
+
+
+        <li><a href="{{ url_for('productos.nuevo') }}">Nuevo Producto</a></li>
+        <li><a href="{{ url_for('clientes.nuevocli') }}">Nuevo Cliente </a></li> 
 
 
     </ul>

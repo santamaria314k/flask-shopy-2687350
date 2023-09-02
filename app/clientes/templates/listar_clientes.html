@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Listado de Clientes</h1>
+    
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Contraseña</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente.username }}</td>
+                <td>{{ cliente.password }}</td>
+                <td>{{ cliente.email }}</td>
+
+                
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

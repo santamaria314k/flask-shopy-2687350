@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_bootstrap import Bootstrap
 from .mi_blueprint import mi_blueprint
 from app.productos import productos
+from app.clientes import clientes
 
             #OBJETOS 
 
@@ -45,6 +46,6 @@ def master():
 #registrar el nuevo modulo
 app.register_blueprint(mi_blueprint)
 app.register_blueprint(productos)
-
+app.register_blueprint(clientes)
 
 
