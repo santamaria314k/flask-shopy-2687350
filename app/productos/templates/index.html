@@ -2,15 +2,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- se mostraran los mensajes flask -->
+{% for mensaje in get_flashed_messages() %}
+<div  class="alert alert-success alert-dismissable">
+   <button  type="button" data-dismiss="alert" class="close">
+    &times;
+   </button>
+    {{ mensaje }}
+</div>
+{% endfor  %}
     <h1>Listado de Productos</h1>
-    
+
+    <a href="/productos/nuevo" class="btn btn-success">
+Nuevo producto
+    </a>
+
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>Nombre</th>
                 <th>Precio</th>
                 <th>imagen</th>
-
+                <th>Actualizar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +33,8 @@
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.precio }}</td>
                 <td><img src="imagenes/{{producto.imagen}}" alt=""></td>
+                <td> <a href="/productos/editar/{{producto.id}}">Actulizar</a> </td>
+                <td> <a href="/productos/eliminar/{{producto.id}}">Eliminar</a> </td>
 
             </tr>
             {% endfor %}

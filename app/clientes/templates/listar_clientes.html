@@ -1,14 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- se mostraran los mensajes flask -->
+{% for mensaje in get_flashed_messages() %}
+<div  class="alert alert-success alert-dismissable">
+   <button  type="button" data-dismiss="alert" class="close">
+    &times;
+   </button>
+    {{ mensaje }}
+</div>
+{% endfor  %}
     <h1>Listado de Clientes</h1>
     
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Usuario</th>
-                <th>Contraseña</th>
+                <th>contraseña</th>
+                <th>correo</th>
+                <th>actualizar</th>
+                <th>eliminar</th>
+               
 
             </tr>
         </thead>
@@ -18,7 +30,8 @@
                 <td>{{ cliente.username }}</td>
                 <td>{{ cliente.password }}</td>
                 <td>{{ cliente.email }}</td>
-
+                <td> <a href="/clientes/editar/{{cliente.id}}">Actulizar</a> </td>
+                <td> <a href="/clientes/eliminar/{{cliente.id}}">Eliminar</a> </td>
                 
 
             </tr>

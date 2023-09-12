@@ -4,7 +4,7 @@
 
 
 {% block content %}
-<h1> nuevo producto</h1>
+<h1> {{ operacion }} producto</h1>
 
 <form method="POST" action="" novalidate enctype="multipart/form-data">
 {{wtf.quick_form(form)}}
